@@ -24,7 +24,7 @@ install_lxde_desktop()
 {
 	_user="orangepi"
 	_auto="-y -q"
-	if [ $DISTRO = "bionic" -o $DISTRO = "xenial" ]; then
+	if [ $DISTRO = "bionic" -o $DISTRO = "focal" ]; then
 		_DST=Ubuntu
 	else
 		_DST=Debian
@@ -352,21 +352,21 @@ prepare_env()
 	trap cleanup EXIT
 
 	case $DISTRO in
-		xenial)
+		focal)
 			case $SOURCES in
 				"CDN"|"OFCL")
 			       	        SOURCES="http://ports.ubuntu.com"
-					ROOTFS="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRO}/release/ubuntu-base-16.04-core-${ARCH}.tar.gz"
+					ROOTFS="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRO}/release/ubuntu-base-20.04.2-core-${ARCH}.tar.gz"
 				        ;;
 				"CN")
 				        #SOURCES="http://mirrors.aliyun.com/ubuntu-ports"
 		                        #SOURCES="http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports"
 				        SOURCES="http://mirrors.ustc.edu.cn/ubuntu-ports"
-					ROOTFS="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cdimage/ubuntu-base/releases/${DISTRO}/release/ubuntu-base-16.04-core-${ARCH}.tar.gz"
+					ROOTFS="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cdimage/ubuntu-base/releases/${DISTRO}/release/ubuntu-base-20.04.2-base-${ARCH}.tar.gz"
 				        ;;
 				*)
 					SOURCES="http://ports.ubuntu.com"
-					ROOTFS="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRO}/release/ubuntu-base-16.04-core-${ARCH}.tar.gz"
+					ROOTFS="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRO}/release/ubuntu-base-20.04.2-core-${ARCH}.tar.gz"
 					;;
 			esac
 			;;
@@ -437,7 +437,7 @@ prepare_rootfs_server()
 
 	rm "$DEST/etc/resolv.conf"
 	cp /etc/resolv.conf "$DEST/etc/resolv.conf"
-	if [ "$DISTRO" = "xenial" -o "$DISTRO" = "bionic" ]; then
+	if [ "$DISTRO" = "focal" -o "$DISTRO" = "bionic" ]; then
 		DEB=ubuntu
 		DEBUSER=orangepi
 		EXTRADEBS="software-properties-common libjpeg8-dev usbmount zram-config ubuntu-minimal net-tools"

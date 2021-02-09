@@ -76,11 +76,11 @@ prepare_host()
 	fi
 
 	apt-get -y --no-install-recommends --fix-missing install \
-		        bsdtar mtools u-boot-tools pv bc \
+		        libarchive-tools mtools u-boot-tools pv bc \
 		        gcc automake make binfmt-support flex \
 		        lib32z1 lib32z1-dev qemu-user-static bison \
 		        dosfstools libncurses5-dev debootstrap \
-		        swig libpython2.7-dev libssl-dev python-minimal dos2unix
+		        swig libpython2.7-dev libssl-dev python2-minimal dos2unix
 
 	# Prepare toolchains
 	chmod 755 -R $ROOT/toolchain/*
@@ -186,7 +186,7 @@ select_distro()
 	OPTION=$(whiptail --title "OrangePi Build System" \
 		--menu "$MENUSTR" 20 60 10 --cancel-button Finish --ok-button Select \
                 "0"   "[$SOURCES]Change repository server" \
-                "1"   "Ubuntu Xenial" \
+                "1"   "Ubuntu Focal" \
                 "2"   "Debian Stretch" \
                 "3"   "Ubuntu Bionic" \
                 3>&1 1>&2 2>&3)
@@ -196,7 +196,7 @@ select_distro()
 				select_sources 
 				;;
 			"1") 
-				DISTRO="xenial"
+				DISTRO="focal"
 	                     	OS="ubuntu"
 				;;
 		 	"2")     
